@@ -4,25 +4,23 @@ using UnityEngine;
 
 public class LineOfSight : MonoBehaviour {
 
-    public bool playerInRange;
-    public int range;
-    public int Fov;
+    public int range;//How far the enemy can see
+    public int Fov; //Field of view(aka the angle the enemy can see)
     [SerializeField]
-    Transform lineOfSightEnd;
-    Transform player; // a reference to the player for raycasting
+    Transform lineOfSightEnd; // This will reference a child transform INSIDE the enemy that dictates the lenght of sigh
+    Transform player; 
     
 
     void Start()
     {
-        playerInRange = true;
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
     }
 
     void FixedUpdate()
     {
-        if (Vector2.Distance(player.position, transform.position) < range)
-            if (PlayerInFieldOfView())
-                if(!PlayerHiddenByObstacles())
+        if (Vector2.Distance(player.position, transform.position) < range) //If the enemy are close
+            if (PlayerInFieldOfView()) //If the player is in the enemy FoV
+                if(!PlayerHiddenByObstacles())//If there is no obstacle betweent he player and the enemy
                     Debug.Log("Seen");
     }
 
