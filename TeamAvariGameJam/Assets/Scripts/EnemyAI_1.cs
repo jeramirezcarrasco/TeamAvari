@@ -15,15 +15,16 @@ public class EnemyAI_1 : MonoBehaviour
     public Transform GroundDetection1;
     public Transform GroundDetection2;
     private LineOfSight lineofsight;
+    private Shooting1 shooting1;
 
     private void Awake()
     {
         lineofsight = GetComponent<LineOfSight>();
+        shooting1 = GetComponent<Shooting1>();
     }
 
     private void Start()
     {
-
         float Speed = Maxspeed;
     }
     void Update()
@@ -31,6 +32,10 @@ public class EnemyAI_1 : MonoBehaviour
         if (!lineofsight.Spoted())
         {
             Patrol();
+        }
+        else if (lineofsight.Spoted())
+        {
+            shooting1.PointAndShot();
         }
             
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LineOfSight : MonoBehaviour {
-
+    
     public int range;//How far the enemy can see
     public int Fov; //Field of view(aka the angle the enemy can see)
     [SerializeField]
@@ -13,8 +13,8 @@ public class LineOfSight : MonoBehaviour {
 
     void Start()
     {
-        //player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
-        player = PidgeonMovement.Instance.transform;
+        player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
+        //player = PidgeonMovement.Instance.transform;
     }
 
     public bool Spoted()

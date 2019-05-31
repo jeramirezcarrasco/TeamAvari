@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50469637265620030}
   - component: {fileID: 114035347994279800}
   m_Layer: 0
-  m_Name: Patrol&Stop AI
+  m_Name: Enemigo2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
