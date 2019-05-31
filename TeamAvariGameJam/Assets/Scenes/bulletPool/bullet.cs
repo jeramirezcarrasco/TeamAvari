@@ -2,46 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bullet : MonoBehaviour
+public class Bullet : MonoBehaviour
 {
-    //******************************
-    //IGNORE THIS CODE!!
-    //******************************
+    private Transform playerPos;
+    [SerializeField] private float speed;
+    [SerializeField] private float offset;
 
-    //[SerializeField] private float speed;
-    //public bool invisible;
-    //public bool shot;
-    //public GameObject shooter;
-    //private Transform playerPos;
+    private void OnEnable()
+    {
+        playerPos = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+    
 
-    //private void Awake()
-    //{
-    //    gameObject.SetActive(false);
-    //    invisible = true;
-    //}
-
-    //private void Update()
-    //{
-    //    if (invisible && shooter != null)
-    //    {
-    //        transform.position = shooter.transform.position; //follow enemy that would shoot it.
-    //    }
-    //    else if(Vector2.Distance(transform.position, playerPos.position) > 0 && invisible ){ //if it's not at the player or invisible.
-    //        transform.position = Vector2.MoveTowards(transform.position, playerPos.position, speed * Time.deltaTime);
-    //    }
-    //}
-
-    //public void EstablishShooter(GameObject shooterEstablisher)
-    //{
-    //    shooter = shooterEstablisher;
-    //}
-
-    //public void Fly()
-    //{
-    //    playerPos = GameObject.FindGameObjectWithTag("Player").transform;
-    //    invisible = false;
-
-
-    //}
+    private void Update()
+    {
+        if (playerPos != null && gameObject.activeSelf == true)
+        {
+            transform.Translate(Vector2.right * speed * Time.deltaTime); //you may need to change the vector2.____ part depending on which way the bullet is facing.
+        }
+    }
 
 }
