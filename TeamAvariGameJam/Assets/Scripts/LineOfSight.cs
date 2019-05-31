@@ -16,15 +16,18 @@ public class LineOfSight : MonoBehaviour {
         player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
     }
 
-    void FixedUpdate()
+    public bool Spoted()
     {
         if (Vector2.Distance(player.position, transform.position) < range) //If the enemy are close
             if (PlayerInFieldOfView()) //If the player is in the enemy FoV
-                if(!PlayerHiddenByObstacles())//If there is no obstacle betweent he player and the enemy
-                    Debug.Log("Seen");
-    }
+                if (!PlayerHiddenByObstacles())//If there is no obstacle betweent he player and the enemy
+                {
+                    Debug.Log("Spoted");
+                    return true;
 
-   
+                }
+        return false;
+    }
 
     bool PlayerInFieldOfView()
     {
@@ -69,7 +72,6 @@ public class LineOfSight : MonoBehaviour {
                 return true;
             }
         }
-
         // if no objects were closer to the enemy than the player return false (player is not hidden by an object)
         return false;
 
