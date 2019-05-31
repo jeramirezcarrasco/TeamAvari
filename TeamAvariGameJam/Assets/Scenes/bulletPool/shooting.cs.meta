@@ -1,11 +1,32 @@
-fileFormatVersion: 2
-guid: ca8c57045b7c3474e8503b8dfb40201f
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Shooting : MonoBehaviour {
+
+    [SerializeField] private GameObject shooterPos;
+    private bjectPooler
+
+    //******************************
+    //IGNORE THIS CODE!!
+    //******************************
+
+
+    //[SerializeField] GameObject bulletPrefab;
+    //GameObject bullet;
+
+    //private void Awake()
+    //{
+    //    bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+    //    bullet.GetComponent<bullet>().EstablishShooter(gameObject);
+
+    //}
+
+    //private void Update()
+    //{
+    //    if (Input.GetKey(KeyCode.Space))
+    //    {
+    //        bullet.GetComponent<bullet>().Fly();
+    //    }
+    //}
+}

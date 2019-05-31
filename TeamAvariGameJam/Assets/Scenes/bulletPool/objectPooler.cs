@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class objectPooler : MonoBehaviour {
+public class ObjectPooler : MonoBehaviour {
 
     [System.Serializable]
     public class Pool //to create multiple pools of objects
@@ -11,6 +11,15 @@ public class objectPooler : MonoBehaviour {
         public GameObject prefab;
         public int size;
     }
+
+    #region Singleton
+    public static ObjectPooler Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    #endregion
 
     public List<Pool> pools; //list of pools
 
@@ -48,7 +57,7 @@ public class objectPooler : MonoBehaviour {
 
         poolDictionary[tag].Enqueue(objectToSpawn);//add back to the pool.
 
-        return objectToSpawn;//to use with the function.
+        return objectToSpawn;//to use the object with the function.
     }
 
 }
