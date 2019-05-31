@@ -31,11 +31,13 @@ public class EnemyAI_1 : MonoBehaviour
     {
         if (!lineofsight.Spoted())
         {
+            shooting1.endShooting();
             Patrol();
         }
         else if (lineofsight.Spoted())
         {
-            shooting1.PointAndShot();
+            shooting1.startShooting();
+            shooting1.Point();
         }
             
     }
