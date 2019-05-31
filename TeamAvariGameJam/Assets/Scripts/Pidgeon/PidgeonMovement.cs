@@ -11,9 +11,12 @@ public class PidgeonMovement : MonoBehaviour {
 	public float movingSpeed;
 	
 	public int maximumFlaps=10;
+	public float timeBetweenFlapping;
 	private int currentFlapsRemaining;
 	
-	Vector2 tempVector;
+	private Vector2 tempVector;
+	private bool isGrounded;
+	private bool canFlap;
 	
 	private static PidgeonMovement instance;
     public static PidgeonMovement Instance{
@@ -38,8 +41,12 @@ public class PidgeonMovement : MonoBehaviour {
 			tempVector.y=flyingForce;
 			rigidbody.AddForce(tempVector);
 			currentFlapsRemaining--;
-			Debug.Log("Flapping");
+			isGrounded=false;
 		}
+	}
+	
+	public void InGround(){
+		isGrounded=true;
 	}
 	
 	
