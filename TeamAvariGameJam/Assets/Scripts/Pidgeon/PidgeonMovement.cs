@@ -9,10 +9,10 @@ public class PidgeonMovement : MonoBehaviour {
 	
 	public float flyingForce;
 	public float walkingSpeed;
-	public float flyingSpeed;	
+	public float flyingSpeed;
+	public float maxVerticalSpeed;
 	
 	public int maximumFlaps=10;
-	public float timeBetweenFlapping;
 	private int currentFlapsRemaining;
 	
 	private Vector2 tempVector;
@@ -40,7 +40,10 @@ public class PidgeonMovement : MonoBehaviour {
 		if(currentFlapsRemaining>0){
 			tempVector.x=0;
 			tempVector.y=flyingForce;
-			rigidbody.AddForce(tempVector);
+			Debug.Log(rigidbody.velocity);
+			if((rigidbody.velocity.y)<maxVerticalSpeed){
+				rigidbody.AddForce(tempVector);
+			}
 			currentFlapsRemaining--;
 			isGrounded=false;
 		}
