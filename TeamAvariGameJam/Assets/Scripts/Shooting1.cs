@@ -48,11 +48,13 @@ public class Shooting1 : MonoBehaviour
     public void startShooting()
     {
         GunOn = true;
+        Debug.Log("GunON");
     }
 
     public void endShooting()
     {
         GunOn = false;
+        Debug.Log("GunOFF");
     }
 
     void Shoot()
@@ -60,6 +62,7 @@ public class Shooting1 : MonoBehaviour
         if (GunOn)
         {
             GameObject bullet = (GameObject)Instantiate(Bullelt, Gun.transform.position, Gun.transform.rotation);
+            Debug.Log("instantiatedBullet");
             bullet.transform.Rotate(0, 0, Random.Range(-Spread, Spread));
         }
 
