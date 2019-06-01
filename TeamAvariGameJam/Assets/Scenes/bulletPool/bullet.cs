@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
 
     public Rigidbody2D rb;
     public GameObject Impact;
+
     private void OnEnable()
     {
         playerPos = GameObject.FindGameObjectWithTag("Player").transform;
@@ -24,35 +25,35 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        rb.velocity = transform.right * speed;
+    //void Start()
+    //{
+    //    rb.velocity = transform.right * speed;
 
-        Destroy(gameObject, 5);
-    }
+    //    Destroy(gameObject, 5);
+    //}
 
-    private void OnTriggerEnter2D(Collider2D hitInfo)
-    {
-        Enemy enemy = hitInfo.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage();
-            Instantiate(Impact, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-        Enemy2 enemy2 = hitInfo.GetComponent<Enemy2>();
-        if (enemy2 != null)
-        {
-            enemy2.TakeDamage();
-            Instantiate(Impact, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
-        if (hitInfo.gameObject.tag == "Bullet")
-        {
-            Instantiate(Impact, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
+    //private void OnTriggerEnter2D(Collider2D hitInfo)
+    //{
+    //    Enemy enemy = hitInfo.GetComponent<Enemy>();
+    //    if (enemy != null)
+    //    {
+    //        enemy.TakeDamage();
+    //        Instantiate(Impact, transform.position, transform.rotation);
+    //        Destroy(gameObject);
+    //    }
+    //    Enemy2 enemy2 = hitInfo.GetComponent<Enemy2>();
+    //    if (enemy2 != null)
+    //    {
+    //        enemy2.TakeDamage();
+    //        Instantiate(Impact, transform.position, transform.rotation);
+    //        Destroy(gameObject);
+    //    }
+    //    if (hitInfo.gameObject.tag == "Bullet")
+    //    {
+    //        Instantiate(Impact, transform.position, transform.rotation);
+    //        Destroy(gameObject);
+    //    }
 
-    }
+    //}
 
 }

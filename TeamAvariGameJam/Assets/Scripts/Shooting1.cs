@@ -14,7 +14,7 @@ public class Shooting1 : MonoBehaviour
     public float GunAimSpeed;
     public float attackSpeedSeconds;
     public GameObject Gun;
-    public GameObject Bullelt;
+    public GameObject Bullet;
     public float Spread;
     private bool GunOn;
     private bool Busy;
@@ -69,21 +69,6 @@ public class Shooting1 : MonoBehaviour
         Debug.Log("GunOFF");
     }
 
-
-    void Shoot()
-    {
-        if (GunOn)
-        {
-            GameObject bullet = (GameObject)Instantiate(Bullelt, Gun.transform.position, Gun.transform.rotation);
-            Debug.Log("instantiatedBullet");
-            bullet.transform.Rotate(0, 0, Random.Range(-Spread, Spread));
-        }
-
-    }
-
-    
-
-
     public void Point()
     {
         Vector2 direction = Player.position - Gun.transform.position;
@@ -97,7 +82,7 @@ public class Shooting1 : MonoBehaviour
         yield return new WaitForSeconds(WakeUp);
         while(GunOn)
         {
-            GameObject bullet = (GameObject)Instantiate(Bullelt, Gun.transform.position, Gun.transform.rotation);
+            GameObject bullet = (GameObject)Instantiate(Bullet, Gun.transform.position, Gun.transform.rotation);
             bullet.transform.Rotate(0, 0, Random.Range(-Spread, Spread));
             BulletMove bulletMove = bullet.GetComponent<BulletMove>();
             bulletMove.speed = bulletMove.speed + Random.Range(-BulletSpeedGap,0);
