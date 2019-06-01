@@ -11,12 +11,16 @@ public class Shooting1 : MonoBehaviour
     [SerializeField] private float startTimeBtwShot;
     [SerializeField] private float timeBtwShot;
     public Transform Player;
-    public float Bulletspeed;
+    public float GunAimSpeed;
     public float attackspeedSeconds;
     public GameObject Gun;
     public GameObject Bullelt;
     public float Spread;
     private bool GunOn;
+    public float WaitAwaketime;
+    public float BulletGap;
+    public float BulletSpeedGap;
+    private bool bussy;
 
 
     private void Awake()
@@ -28,7 +32,7 @@ public class Shooting1 : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player").transform;
         GunOn = false;
-        InvokeRepeating("Shoot", 1, attackspeedSeconds);
+        
     }
 
     private void Update()
@@ -47,7 +51,11 @@ public class Shooting1 : MonoBehaviour
     
     public void startShooting()
     {
-        GunOn = true;
+        if (!GunOn && !bussy)
+        {
+            GunOn = true;
+            StartCoroutine(BulletSpawn());
+        }
     }
 
     public void endShooting()
@@ -60,6 +68,8 @@ public class Shooting1 : MonoBehaviour
         if (GunOn)
         {
             GameObject bullet = (GameObject)Instantiate(Bullelt, Gun.transform.position, Gun.transform.rotation);
+            BulletMove BulletSpeed = bullet.GetComponent<BulletMove>();
+            BulletSpeed.speed = BulletSpeed.speed - Random.Range(-BulletSpeedGap, 0);
             bullet.transform.Rotate(0, 0, Random.Range(-Spread, Spread));
         }
 
@@ -70,7 +80,22 @@ public class Shooting1 : MonoBehaviour
         Vector2 direction = Player.position - Gun.transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-        Gun.transform.rotation = Quaternion.Slerp(Gun.transform.rotation, rotation, Bulletspeed * Time.deltaTime);
+        Gun.transform.rotation = Quaternion.Slerp(Gun.transform.rotation, rotation, GunAimSpeed * Time.deltaTime);
+    }
+
+    IEnumerator BulletSpawn()
+    {
+        yield return new WaitForSeconds(WaitAwaketime);
+        while (GunOn)
+        {
+            
+            Shoot();
+            bussy = true;
+            float gap = attackspeedSeconds + Random.Range(0, BulletGap);
+            yield return new WaitForSeconds(gap);
+            bussy = false;
+        }
+
     }
 
 }
