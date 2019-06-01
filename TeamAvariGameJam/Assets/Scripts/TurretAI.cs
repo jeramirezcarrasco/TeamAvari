@@ -7,12 +7,17 @@ public class TurretAI : MonoBehaviour {
     public int LookSpeed;
     private LineOfSight lineofsight;
     private Shooting1 shooting1;
+    private LineOfSightVisual lineOfSightVisual;
     int angle;
     bool left;
+    public int AlertViewRange;
+    public int MaxAngle;
+    public int MinAngle;
 
     // Use this for initialization
     void Awake ()
     {
+        lineOfSightVisual = GetComponent<LineOfSightVisual>();
         lineofsight = GetComponent<LineOfSight>();
         shooting1 = GetComponent<Shooting1>();
 
@@ -24,17 +29,22 @@ public class TurretAI : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         if (!lineofsight.Spoted())
         {
+
+            lineOfSightVisual.DrawFieldOfView();
             lineofsight.CurrFov = lineofsight.Fov;
+            lineofsight.CurrRange = lineofsight.range;
             LookPatrol();
             shooting1.endShooting();
 
         }
         else if(lineofsight.Spoted())
         {
+            lineOfSightVisual.viewMesh.Clear();
+            lineofsight.CurrRange = AlertViewRange;
             lineofsight.CurrFov = 110;
             shooting1.startShooting();
             shooting1.Point();
@@ -46,7 +56,7 @@ public class TurretAI : MonoBehaviour {
     {
         if (left)
         {
-            if (angle < 10)
+            if (angle < MinAngle)
             {
                 left = false;
             }
@@ -56,7 +66,7 @@ public class TurretAI : MonoBehaviour {
         }
         else if (!left)
         {
-            if (angle > 170)
+            if (angle > MaxAngle)
             {
                 left = true;
             }

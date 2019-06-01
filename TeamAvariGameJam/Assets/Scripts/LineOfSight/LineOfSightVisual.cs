@@ -15,7 +15,7 @@ public class LineOfSightVisual : MonoBehaviour {
 	public float edgeDstThreshold=0.1f;
 
 	public MeshFilter viewMeshFilter;
-	Mesh viewMesh;
+	public Mesh viewMesh;
 
 	[ContextMenu("SetUp")]
 	public void SetUp(){
@@ -40,11 +40,11 @@ public class LineOfSightVisual : MonoBehaviour {
 		viewMeshFilter.mesh = viewMesh;
 	}
 
-	void LateUpdate() {
-		DrawFieldOfView ();
-	}
+	//void LateUpdate() {
+	//	DrawFieldOfView ();
+	//}
 	
-	void DrawFieldOfView() {
+	public void DrawFieldOfView() {
 		int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
 		float stepAngleSize = viewAngle / stepCount;
 		List<Vector3> viewPoints = new List<Vector3> ();
