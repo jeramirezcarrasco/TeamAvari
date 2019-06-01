@@ -13,7 +13,8 @@ public class LineOfSight : MonoBehaviour {
 
     void Start()
     {
-        player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
+        //player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
+        player = PidgeonMovement.Instance.transform;
     }
 
     public bool Spoted()
