@@ -456,8 +456,8 @@ MonoBehaviour:
   startTimeBtwShot: 0
   timeBtwShot: 0
   Player: {fileID: 0}
-  Bulletspeed: 7
-  attackspeedSeconds: 0.3
+  speed: 10
+  attackspeed: 10
   Gun: {fileID: 101645683}
   Bullelt: {fileID: 1584762383712998, guid: 4e10a79ac76405f4c81e551b5f404832, type: 2}
   Spread: 20
