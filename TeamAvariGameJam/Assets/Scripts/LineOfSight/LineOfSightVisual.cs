@@ -51,6 +51,7 @@ public class LineOfSightVisual : MonoBehaviour {
 		ViewCastInfo oldViewCast = new ViewCastInfo ();
 		for (int i = 0; i <= stepCount; i++) {
 			float angle = transform.eulerAngles.z - viewAngle / 2 + stepAngleSize * i;
+            Debug.Log(angle);
 			ViewCastInfo newViewCast = ViewCast (angle);
 			if (i > 0) {
 				bool edgeDstThresholdExceeded = Mathf.Abs (oldViewCast.dst - newViewCast.dst) > edgeDstThreshold;

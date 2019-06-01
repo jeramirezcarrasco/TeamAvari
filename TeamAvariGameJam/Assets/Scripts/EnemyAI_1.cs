@@ -33,11 +33,13 @@ public class EnemyAI_1 : MonoBehaviour
     {
         if (!lineofsight.Spoted())
         {
+            lineofsight.CurrFov = lineofsight.Fov;
             shooting1.endShooting();
             Patrol();
         }
         else if (lineofsight.Spoted())
         {
+            lineofsight.CurrFov = 110;
             shooting1.startShooting();
             shooting1.Point();
             chaseAI.Follow();

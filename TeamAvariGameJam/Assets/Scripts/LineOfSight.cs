@@ -8,7 +8,8 @@ public class LineOfSight : MonoBehaviour {
     public int Fov; //Field of view(aka the angle the enemy can see)
     [SerializeField]
     Transform lineOfSightEnd; // This will reference a child transform INSIDE the enemy that dictates the lenght of sigh
-    Transform player; 
+    Transform player;
+    public int CurrFov;
     
 
     void Start()
@@ -18,6 +19,7 @@ public class LineOfSight : MonoBehaviour {
         }else{
             player=PidgeonMovement.Instance.transform;
         }
+        CurrFov = Fov;
     }
 
     public bool Spoted()
@@ -46,7 +48,7 @@ public class LineOfSight : MonoBehaviour {
         // calculate the angle formed between the player's position and the centre of the enemy's line of sight
         float angle = Vector2.Angle(directionToPlayer, lineOfSight);
         // if the player is within 65 degrees (either direction) of the enemy's centre of vision (i.e. within a 130 degree cone whose centre is directly ahead of the enemy) return true
-        if (angle < Fov)
+        if (angle < CurrFov)
         {
             return true;
         }
