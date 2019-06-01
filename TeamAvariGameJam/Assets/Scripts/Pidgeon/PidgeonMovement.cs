@@ -40,7 +40,6 @@ public class PidgeonMovement : MonoBehaviour {
 		if(currentFlapsRemaining>0){
 			tempVector.x=0;
 			tempVector.y=flyingForce;
-			Debug.Log(rigidbody.velocity);
 			if((rigidbody.velocity.y)<maxVerticalSpeed){
 				rigidbody.AddForce(tempVector);
 			}

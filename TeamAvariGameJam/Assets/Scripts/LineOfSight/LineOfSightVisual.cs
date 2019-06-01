@@ -8,11 +8,7 @@ public class LineOfSightVisual : MonoBehaviour {
 	[Range(0,360)]
 	public float viewAngle;
 
-	public LayerMask targetMask;
 	public LayerMask obstacleMask;
-
-	[HideInInspector]
-	public List<Transform> visibleTargets = new List<Transform>();
 
 	public float meshResolution;
 	public int edgeResolveIterations;
@@ -29,33 +25,10 @@ public class LineOfSightVisual : MonoBehaviour {
 		StartCoroutine ("FindTargetsWithDelay", .2f);
 	}
 
-
-	IEnumerator FindTargetsWithDelay(float delay) {
-		while (true) {
-			yield return new WaitForSeconds (delay);
-			FindVisibleTargets ();
-		}
-	}
-
 	void LateUpdate() {
 		DrawFieldOfView ();
 	}
-
-	void FindVisibleTargets() {
-		visibleTargets.Clear ();
-		Collider2D[] targetsInViewRadius = Physics2D.OverlapCircleAll(transform.position, viewRadius, targetMask);
-		for (int i = 0; i < targetsInViewRadius.Length; i++) {
-			Transform target = targetsInViewRadius [i].transform;
-			Vector3 dirToTarget = (target.position - transform.position).normalized;
-			if (Vector3.Angle (transform.right, dirToTarget) < viewAngle / 2) {
-				float dstToTarget = Vector3.Distance (transform.position, target.position);
-				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
-					visibleTargets.Add (target);
-				}
-			}
-		}
-	}
-
+	
 	void DrawFieldOfView() {
 		int stepCount = Mathf.RoundToInt(viewAngle * meshResolution);
 		float stepAngleSize = viewAngle / stepCount;
@@ -129,14 +102,6 @@ public class LineOfSightVisual : MonoBehaviour {
 
 
 	ViewCastInfo ViewCast(float globalAngle) {
-		/*Vector3 dir = DirFromAngle (globalAngle, true);
-		RaycastHit hit;
-		if (Physics.Raycast (transform.position, dir, out hit, viewRadius, obstacleMask)) {
-			
-			return new ViewCastInfo (true, hit.point, hit.distance, globalAngle);
-		} else {
-			return new ViewCastInfo (false, transform.position + dir * viewRadius, viewRadius, globalAngle);
-		}*/
 		Vector3 dir = DirFromAngle (globalAngle, true);
 		RaycastHit2D hit=Physics2D.Raycast(transform.position,dir,viewRadius,obstacleMask);
 		if(hit.distance!=0){
