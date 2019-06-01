@@ -16,11 +16,13 @@ public class EnemyAI_1 : MonoBehaviour
     public Transform GroundDetection2;
     private LineOfSight lineofsight;
     private Shooting1 shooting1;
+    private ChaseAI chaseAI;
 
     private void Awake()
     {
         lineofsight = GetComponent<LineOfSight>();
         shooting1 = GetComponent<Shooting1>();
+        chaseAI = GetComponent<ChaseAI>();
     }
 
     private void Start()
@@ -38,6 +40,7 @@ public class EnemyAI_1 : MonoBehaviour
         {
             shooting1.startShooting();
             shooting1.Point();
+            chaseAI.Follow();
         }
             
     }
