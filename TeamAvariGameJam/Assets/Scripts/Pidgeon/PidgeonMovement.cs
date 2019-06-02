@@ -46,12 +46,18 @@ public class PidgeonMovement : MonoBehaviour {
 			}
 			currentFlapsRemaining--;
 			isGrounded=false;
+			if(UIManager.Instance!=null){
+				UIManager.Instance.SetFlapsRemaining(currentFlapsRemaining);
+			}
 		}
 	}
 	
 	public void InGround(){
 		isGrounded=true;
 		currentFlapsRemaining=maximumFlaps;
+		if(UIManager.Instance!=null){
+			UIManager.Instance.SetFlapsRemaining(currentFlapsRemaining);
+		}
 	}
 	
 	public void MoveSide(float y){
