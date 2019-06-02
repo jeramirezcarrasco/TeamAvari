@@ -50,9 +50,6 @@ public class Shooting1 : MonoBehaviour
     
     public void startShooting()
     {
-
-        Debug.Log("GunON");
-
         if (!GunOn && !Busy)
         {
             GunOn = true;
@@ -65,7 +62,6 @@ public class Shooting1 : MonoBehaviour
     public void endShooting()
     {
         GunOn = false;
-        Debug.Log("GunOFF");
     }
 
     public void Point()

@@ -23,9 +23,7 @@ public class LineOfSight : MonoBehaviour {
             if (PlayerInFieldOfView()) //If the player is in the enemy FoV
                 if (!PlayerHiddenByObstacles())//If there is no obstacle betweent he player and the enemy
                 {
-                    Debug.Log("Spoted");
                     return true;
-
                 }
         return false;
     }
