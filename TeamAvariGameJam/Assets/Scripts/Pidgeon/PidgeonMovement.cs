@@ -18,7 +18,6 @@ public class PidgeonMovement : MonoBehaviour {
 	private Vector2 tempVector;
 	private bool isGrounded;
 	private bool canFlap;
-	public SpriteRenderer spriteRendererPidgeon;
 	
 	private static PidgeonMovement instance;
     public static PidgeonMovement Instance{
@@ -54,16 +53,11 @@ public class PidgeonMovement : MonoBehaviour {
 		currentFlapsRemaining=maximumFlaps;
 	}
 	
-	public void MoveSide(float y){
-		if(y<0){
-			spriteRendererPidgeon.flipX=true;
-		}else{
-			spriteRendererPidgeon.flipX=false;	
-		}
+	public void MoveSide(float y){		
 		if(isGrounded){
 			tempVector.x=walkingSpeed*y;
 		}else{
-			tempVector.x=walkingSpeed*y;
+			tempVector.x=walkingSpeed*y;			
 		}
 		tempVector.y=rigidbody.velocity.y;
 		rigidbody.velocity=tempVector;
