@@ -4,25 +4,40 @@ using UnityEngine;
 
 public class LineOfSightVisual : MonoBehaviour {
 	
-	public float viewRadius;
+	public float viewRadius=10;
 	[Range(0,360)]
-	public float viewAngle;
+	public float viewAngle=45;
 
 	public LayerMask obstacleMask;
 
-	public float meshResolution;
-	public int edgeResolveIterations;
-	public float edgeDstThreshold;
+	public float meshResolution=1f;
+	public int edgeResolveIterations=4;
+	public float edgeDstThreshold=0.1f;
 
 	public MeshFilter viewMeshFilter;
 	Mesh viewMesh;
 
+	[ContextMenu("SetUp")]
+	public void SetUp(){
+		if(viewMeshFilter==null){
+			GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Plane);
+			viewMesh=quad.GetComponent<Mesh>();		
+			viewMeshFilter = quad.GetComponent<MeshFilter>();
+			quad.transform.parent=transform;
+			quad.transform.localPosition=Vector3.zero;
+			obstacleMask=LayerMask.GetMask("Ground");
+		}
+		LineOfSight newLoS;
+		newLoS=GetComponent<LineOfSight>();
+		if(newLoS!=null){
+			viewAngle=newLoS.Fov;
+			viewRadius=newLoS.range;
+		}
+	}
+
 	void Start() {
 		viewMesh = new Mesh ();
-		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
-
-		StartCoroutine ("FindTargetsWithDelay", .2f);
 	}
 
 	void LateUpdate() {

@@ -30,7 +30,11 @@ public class Shooting1 : MonoBehaviour
 
     private void Start()
     {
-        Player = GameObject.FindWithTag("Player").transform;
+        if(PidgeonMovement.Instance==null){
+            Player = GameObject.FindWithTag("Player").transform;
+        }else{
+            Player=PidgeonMovement.Instance.transform;
+        }
         GunOn = false;
     }
 

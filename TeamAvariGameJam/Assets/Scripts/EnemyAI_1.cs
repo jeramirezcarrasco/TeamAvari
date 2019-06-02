@@ -68,7 +68,7 @@ public class EnemyAI_1 : MonoBehaviour
         {
             if (MovRight)
             {
-                transform.eulerAngles = new Vector3(0, -180, 0);
+                transform.eulerAngles = new Vector3(0, 0, 180);
                 MovRight = false;
                 
             }
