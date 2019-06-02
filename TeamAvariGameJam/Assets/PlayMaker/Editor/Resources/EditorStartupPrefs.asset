@@ -13,4 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   welcomeScreenVersion: '1.8.3 '
   playmakerVersion: 
-  showWelcomeScreen: 0
+  showWelcomeScreen: 1
