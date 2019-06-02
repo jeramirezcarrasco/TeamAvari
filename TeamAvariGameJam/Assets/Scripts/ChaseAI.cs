@@ -10,7 +10,11 @@ public class ChaseAI : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
-        player = GameObject.Find("Player").transform;
+        if(PidgeonMovement.Instance==null){
+            player = GameObject.FindWithTag("Player").transform;
+        }else{
+            player=PidgeonMovement.Instance.transform;
+        }
     }
 	
 	// Update is called once per frame

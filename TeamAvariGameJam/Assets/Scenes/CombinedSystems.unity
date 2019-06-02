@@ -314,7 +314,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4929952385778478, guid: 839f4b892d8a1fa46affca03972dd83c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -4.1
+      value: -2.25
       objectReference: {fileID: 0}
     - target: {fileID: 4929952385778478, guid: 839f4b892d8a1fa46affca03972dd83c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -352,10 +352,6 @@ Prefab:
     - target: {fileID: 4582579766398816, guid: 839f4b892d8a1fa46affca03972dd83c, type: 2}
       propertyPath: m_LocalScale.y
       value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1495169846681164, guid: 839f4b892d8a1fa46affca03972dd83c, type: 2}
-      propertyPath: m_TagString
-      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 839f4b892d8a1fa46affca03972dd83c, type: 2}

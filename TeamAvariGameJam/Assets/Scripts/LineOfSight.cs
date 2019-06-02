@@ -13,8 +13,11 @@ public class LineOfSight : MonoBehaviour {
 
     void Start()
     {
-        player = GameObject.Find("Player").transform; //Reference to the player(The player HAS to be named Player)
-        //player = PidgeonMovement.Instance.transform;
+        if(PidgeonMovement.Instance==null){
+            player = GameObject.FindWithTag("Player").transform;
+        }else{
+            player=PidgeonMovement.Instance.transform;
+        }
     }
 
     public bool Spoted()
@@ -23,7 +26,9 @@ public class LineOfSight : MonoBehaviour {
             if (PlayerInFieldOfView()) //If the player is in the enemy FoV
                 if (!PlayerHiddenByObstacles())//If there is no obstacle betweent he player and the enemy
                 {
+                    Debug.Log("Spoted");
                     return true;
+
                 }
         return false;
     }

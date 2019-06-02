@@ -30,7 +30,11 @@ public class Shooting1 : MonoBehaviour
 
     private void Start()
     {
-        Player = GameObject.FindWithTag("Player").transform;
+        if(PidgeonMovement.Instance==null){
+            Player = GameObject.FindWithTag("Player").transform;
+        }else{
+            Player=PidgeonMovement.Instance.transform;
+        }
         GunOn = false;
     }
 
@@ -50,6 +54,9 @@ public class Shooting1 : MonoBehaviour
     
     public void startShooting()
     {
+
+        Debug.Log("GunON");
+
         if (!GunOn && !Busy)
         {
             GunOn = true;
@@ -62,6 +69,7 @@ public class Shooting1 : MonoBehaviour
     public void endShooting()
     {
         GunOn = false;
+        Debug.Log("GunOFF");
     }
 
     public void Point()
