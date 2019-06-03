@@ -23,6 +23,9 @@ public class PidgeonMovement : MonoBehaviour {
 	public int maxLife=3;
 	private int currentLife;
 	
+	private bool canBeDamaged=true;
+	public float invincibilitySecs=0.5f;
+	
     //knockback variables
     [SerializeField] private float knockbackForce;
     [SerializeField] private float startTimeBtwKnock;
@@ -123,6 +126,23 @@ public class PidgeonMovement : MonoBehaviour {
 	}
 	
 	public void GetDamage(){
-		
+		if(canBeDamaged){
+			canBeDamaged=false;
+			--currentLife;
+			Color temp = Color.white;
+			temp.a=0.5f;
+			spriteRendererPidgeon.color=temp;
+			UIManager.Instance.SetHealth(currentLife);
+			StartCoroutine(SetInvincibilityFrames());
+			if(currentLife==0){
+				UIManager.Instance.SetLoseScreen();
+			}
+		}
+	}
+	
+	IEnumerator SetInvincibilityFrames(){
+		yield return new WaitForSeconds(invincibilitySecs);
+		canBeDamaged=true;
+		spriteRendererPidgeon.color=Color.white;
 	}
 }

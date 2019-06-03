@@ -18,6 +18,12 @@ public class BulletMove : MonoBehaviour
         Destroy(gameObject, 5);
         //Invoke("Disappear", 5);
     }
+    
+    private void OnTriggerEnter2D(Collider2D other){
+        if (other.gameObject.CompareTag("Player")){
+            PidgeonMovement.Instance.GetDamage();
+        }
+    }
 
     //void Disappear()
     //{
