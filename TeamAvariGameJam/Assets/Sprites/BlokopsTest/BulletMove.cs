@@ -12,10 +12,17 @@ public class BulletMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //rb.velocity = new Vector2(0,0);
         rb.velocity = transform.right * speed;
 
         Destroy(gameObject, 5);
+        //Invoke("Disappear", 5);
     }
+
+    //void Disappear()
+    //{
+    //    gameObject.SetActive(false);
+    //}
 
     //private void OnTriggerEnter2D(Collider2D hitInfo)
     //{

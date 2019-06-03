@@ -19,8 +19,15 @@ public class PidgeonMovement : MonoBehaviour {
 	private bool isGrounded;
 	private bool canFlap;
 	public SpriteRenderer spriteRendererPidgeon;
-	
-	private static PidgeonMovement instance;
+
+
+    //knockback variables
+    [SerializeField] private float knockbackForce;
+    [SerializeField] private float startTimeBtwKnock;
+    private float timeBtwKnock;
+    private int knockDir;
+
+    private static PidgeonMovement instance;
     public static PidgeonMovement Instance{
         get{
             return instance;
@@ -79,12 +86,40 @@ public class PidgeonMovement : MonoBehaviour {
 		if(other.gameObject.tag=="Ground"){
 			InGround();
         }
-	}
-	
-	/* Do something about this later! */
-	
-	private void FixedUpdate() {
+    }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log(transform.position.x <= other.transform.position.x);
+            if (transform.position.x <= other.transform.position.x)
+            {
+                knockDir = 1;
+                timeBtwKnock = startTimeBtwKnock;
+            }
+            else
+            {
+                knockDir = -1;
+                timeBtwKnock = startTimeBtwKnock;
+            }
+        }
+    }
+
+    /* Do something about this later! */
+
+    private void FixedUpdate() {
 		float y = Input.GetAxisRaw("Horizontal");
-		MoveSide(y);
+        if (timeBtwKnock < 0)
+        {
+            MoveSide(y);
+        }
+        else
+        {
+            //rigidbody.velocity = new Vector2(-knockbackForce * knockDir, knockbackForce);
+            rigidbody.AddForce(new Vector2(-knockbackForce * knockDir, knockbackForce));
+            timeBtwKnock -= Time.deltaTime;
+           
+        }
 	}
 }

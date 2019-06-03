@@ -5,7 +5,7 @@ using UnityEngine;
 public class shooting : MonoBehaviour {
 
     [SerializeField] private Transform shootPos;
-    ObjectPooler objectPooler;
+    objectPooler objectPool;
 
     [SerializeField] private float startTimeBtwShot;
     [SerializeField] private float timeBtwShot;
@@ -16,7 +16,7 @@ public class shooting : MonoBehaviour {
 
     private void Awake()
     {
-        objectPooler = ObjectPooler.Instance;
+        objectPool = objectPooler.Instance;
     }
 
     private void Start()
