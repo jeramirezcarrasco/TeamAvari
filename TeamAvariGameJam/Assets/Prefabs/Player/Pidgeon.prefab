@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4582579766398816}
   - component: {fileID: 212763765249804160}
   m_Layer: 0
-  m_Name: PidgeonSprite
+  m_Name: Idle_1.1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 114486070584692842}
   - component: {fileID: 50586089462116660}
   - component: {fileID: 61866229958104832}
+  - component: {fileID: 95230196399154770}
   m_Layer: 0
   m_Name: Pidgeon
   m_TagString: Player
@@ -84,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1495169846681164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.46, y: -2.25, z: 0}
+  m_LocalPosition: {x: -4.07, y: -1.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4582579766398816}
@@ -218,6 +219,23 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567091050419264}
   m_Enabled: 1
+--- !u!95 &95230196399154770
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1495169846681164}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea9aebee1659ef54fbca2f0304b54e62, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114486070584692842
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -226,7 +244,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1495169846681164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6818476af21d8b443b18d8c55703ebce, type: 3}
+  m_Script: {fileID: 11500000, guid: c19ba4f9215144fa08f0f91fed602d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flyingForce: 20
@@ -235,6 +253,10 @@ MonoBehaviour:
   maxVerticalSpeed: 6
   maximumFlaps: 10
   spriteRendererPidgeon: {fileID: 212763765249804160}
+  maxLife: 3
+  invincibilitySecs: 1
+  knockbackForce: 0.5
+  startTimeBtwKnock: 0.5
 --- !u!124 &124461555568276332
 Behaviour:
   m_ObjectHideFlags: 1

@@ -7,10 +7,10 @@ public class PidgeonMovement : MonoBehaviour {
 	
 	private Rigidbody2D rigidbody;
 	
-	public float flyingForce;
-	public float walkingSpeed;
-	public float flyingSpeed;
-	public float maxVerticalSpeed;
+	public float flyingForce=20f;
+	public float walkingSpeed=5f;
+	public float flyingSpeed=10f;
+	public float maxVerticalSpeed=6f;
 	
 	public int maximumFlaps=10;
 	private int currentFlapsRemaining;
@@ -19,8 +19,21 @@ public class PidgeonMovement : MonoBehaviour {
 	private bool isGrounded;
 	private bool canFlap;
 	public SpriteRenderer spriteRendererPidgeon;
+
+	public int maxLife=3;
+	private int currentLife;
 	
-	private static PidgeonMovement instance;
+	private bool canBeDamaged=true;
+	public float invincibilitySecs=0.5f;
+	private Animator animator;
+	
+    //knockback variables
+    [SerializeField] private float knockbackForce;
+    [SerializeField] private float startTimeBtwKnock;
+    private float timeBtwKnock;
+    private int knockDir;
+
+    private static PidgeonMovement instance;
     public static PidgeonMovement Instance{
         get{
             return instance;
@@ -34,7 +47,9 @@ public class PidgeonMovement : MonoBehaviour {
 	
 	private void Start() {
 		rigidbody=GetComponent<Rigidbody2D>();
+		animator=GetComponent<Animator>();
 		currentFlapsRemaining=maximumFlaps;
+		currentLife=maxLife;
 	}
 	
 	public void Flap(){
@@ -73,18 +88,64 @@ public class PidgeonMovement : MonoBehaviour {
 		}
 		tempVector.y=rigidbody.velocity.y;
 		rigidbody.velocity=tempVector;
+		animator.SetFloat("PlayerSpeed",Mathf.Abs(rigidbody.velocity.x));
 	}
 	
 	public virtual void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.tag=="Ground"){
 			InGround();
         }
+    }
+
+    public void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log(transform.position.x <= other.transform.position.x);
+            if (transform.position.x <= other.transform.position.x)
+            {
+                knockDir = 1;
+                timeBtwKnock = startTimeBtwKnock;
+            }
+            else
+            {
+                knockDir = -1;
+                timeBtwKnock = startTimeBtwKnock;
+            }
+        }
+    }
+
+    /* Do something about this later! */
+
+    private void FixedUpdate() {
+		float y = Input.GetAxisRaw("Horizontal");
+        if (timeBtwKnock < 0)        {
+            MoveSide(y);
+        }else{
+            //rigidbody.velocity = new Vector2(-knockbackForce * knockDir, knockbackForce);
+            rigidbody.AddForce(new Vector2(-knockbackForce * knockDir, knockbackForce));
+            timeBtwKnock -= Time.deltaTime;           
+        }
 	}
 	
-	/* Do something about this later! */
+	public void GetDamage(){
+		if(canBeDamaged){
+			canBeDamaged=false;
+			--currentLife;
+			Color temp = Color.white;
+			temp.a=0.5f;
+			spriteRendererPidgeon.color=temp;
+			UIManager.Instance.SetHealth(currentLife);
+			StartCoroutine(SetInvincibilityFrames());
+			if(currentLife==0){
+				UIManager.Instance.SetLoseScreen();
+			}
+		}
+	}
 	
-	private void FixedUpdate() {
-		float y = Input.GetAxisRaw("Horizontal");
-		MoveSide(y);
+	IEnumerator SetInvincibilityFrames(){
+		yield return new WaitForSeconds(invincibilitySecs);
+		canBeDamaged=true;
+		spriteRendererPidgeon.color=Color.white;
 	}
 }

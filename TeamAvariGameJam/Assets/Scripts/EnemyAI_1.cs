@@ -11,15 +11,20 @@ public class EnemyAI_1 : MonoBehaviour
     public float Acceleration;
 
     private bool MovRight = true;
+    public int AlertViewRange;
+
 
     public Transform GroundDetection1;
     public Transform GroundDetection2;
     private LineOfSight lineofsight;
     private Shooting1 shooting1;
     private ChaseAI chaseAI;
+    private LineOfSightVisual lineOfSightVisual;
+
 
     private void Awake()
     {
+        lineOfSightVisual = GetComponent<LineOfSightVisual>();
         lineofsight = GetComponent<LineOfSight>();
         shooting1 = GetComponent<Shooting1>();
         chaseAI = GetComponent<ChaseAI>();
@@ -33,12 +38,17 @@ public class EnemyAI_1 : MonoBehaviour
     {
         if (!lineofsight.Spoted())
         {
+            lineOfSightVisual.DrawFieldOfView();
             lineofsight.CurrFov = lineofsight.Fov;
+            lineofsight.CurrRange = lineofsight.range;
             shooting1.endShooting();
             Patrol();
         }
         else if (lineofsight.Spoted())
         {
+            lineOfSightVisual.viewMesh.Clear();
+            lineOfSightVisual.viewMesh.Clear();
+            lineofsight.CurrRange = AlertViewRange;
             lineofsight.CurrFov = 110;
             shooting1.startShooting();
             shooting1.Point();

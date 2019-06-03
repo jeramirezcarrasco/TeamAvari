@@ -10,6 +10,7 @@ public class LineOfSight : MonoBehaviour {
     Transform lineOfSightEnd; // This will reference a child transform INSIDE the enemy that dictates the lenght of sigh
     Transform player;
     public int CurrFov;
+    public int CurrRange;
     
 
     void Start()
@@ -20,15 +21,16 @@ public class LineOfSight : MonoBehaviour {
             player=PidgeonMovement.Instance.transform;
         }
         CurrFov = Fov;
+        CurrRange = range;
     }
 
     public bool Spoted()
     {
-        if (Vector2.Distance(player.position, transform.position) < range) //If the enemy are close
+        if (Vector2.Distance(player.position, transform.position) < CurrRange) //If the enemy are close
             if (PlayerInFieldOfView()) //If the player is in the enemy FoV
                 if (!PlayerHiddenByObstacles())//If there is no obstacle betweent he player and the enemy
                 {
-                    Debug.Log("Spoted");
+                    //Debug.Log("Spoted");
                     return true;
 
                 }

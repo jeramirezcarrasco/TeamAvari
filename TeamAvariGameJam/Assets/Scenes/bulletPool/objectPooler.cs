@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour {
+public class objectPooler : MonoBehaviour {
 
     [System.Serializable]
     public class Pool //to create multiple pools of objects
@@ -13,7 +13,7 @@ public class ObjectPooler : MonoBehaviour {
     }
 
     #region Singleton
-    public static ObjectPooler Instance;
+    public static objectPooler Instance;
 
     private void Awake()
     {

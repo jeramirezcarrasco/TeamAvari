@@ -6,7 +6,7 @@ public class Shooting1 : MonoBehaviour
 {
 
     [SerializeField] private Transform shootPos;
-    ObjectPooler objectPooler;
+    //objectPooler objectPool;
 
     [SerializeField] private float startTimeBtwShot;
     [SerializeField] private float timeBtwShot;
@@ -25,7 +25,7 @@ public class Shooting1 : MonoBehaviour
 
     private void Awake()
     {
-        objectPooler = ObjectPooler.Instance;
+        //objectPool = objectPooler.Instance;
     }
 
     private void Start()
@@ -85,6 +85,7 @@ public class Shooting1 : MonoBehaviour
         yield return new WaitForSeconds(WakeUp);
         while(GunOn)
         {
+            //GameObject bullet = objectPool.SpawnFromPool("Bullets", Gun.transform.position, Gun.transform.rotation);
             GameObject bullet = (GameObject)Instantiate(Bullet, Gun.transform.position, Gun.transform.rotation);
             bullet.transform.Rotate(0, 0, Random.Range(-Spread, Spread));
             BulletMove bulletMove = bullet.GetComponent<BulletMove>();

@@ -22,6 +22,11 @@ public class UIManager : MonoBehaviour {
 		instance=this;
 	}
 	
+	private void Start() {
+		winScreen.SetActive(false);
+		loseScreen.SetActive(false);	
+	}
+	
 	public void SetHealth(int value){
 		for(int x=0;x<HealthBars.Length;++x){
 			HealthBars[x].SetActive(false);
