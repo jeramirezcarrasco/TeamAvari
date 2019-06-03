@@ -25,6 +25,7 @@ public class PidgeonMovement : MonoBehaviour {
 	
 	private bool canBeDamaged=true;
 	public float invincibilitySecs=0.5f;
+	private Animator animator;
 	
     //knockback variables
     [SerializeField] private float knockbackForce;
@@ -46,6 +47,7 @@ public class PidgeonMovement : MonoBehaviour {
 	
 	private void Start() {
 		rigidbody=GetComponent<Rigidbody2D>();
+		animator=GetComponent<Animator>();
 		currentFlapsRemaining=maximumFlaps;
 		currentLife=maxLife;
 	}
@@ -86,6 +88,7 @@ public class PidgeonMovement : MonoBehaviour {
 		}
 		tempVector.y=rigidbody.velocity.y;
 		rigidbody.velocity=tempVector;
+		animator.SetFloat("PlayerSpeed",Mathf.Abs(rigidbody.velocity.x));
 	}
 	
 	public virtual void OnTriggerEnter2D(Collider2D other){
