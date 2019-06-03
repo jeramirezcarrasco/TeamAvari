@@ -84,7 +84,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1495169846681164}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.46, y: -2.25, z: 0}
+  m_LocalPosition: {x: -4.07, y: -1.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4582579766398816}
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1495169846681164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6818476af21d8b443b18d8c55703ebce, type: 3}
+  m_Script: {fileID: 11500000, guid: c19ba4f9215144fa08f0f91fed602d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   flyingForce: 20
@@ -235,6 +235,8 @@ MonoBehaviour:
   maxVerticalSpeed: 6
   maximumFlaps: 10
   spriteRendererPidgeon: {fileID: 212763765249804160}
+  knockbackForce: 0
+  startTimeBtwKnock: 0
 --- !u!124 &124461555568276332
 Behaviour:
   m_ObjectHideFlags: 1
